@@ -3,16 +3,20 @@ const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
-
+require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
+
+const db_user = process.env.DB_USER
+const db_password = process.env.DB_PASSWORD
+const db_name = process.env.DB_NAME
 
 // Database Configuration
 const db = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "",
-  database: "coursmysql",
+  user: db_user,
+  password: db_password,
+  database: db_name,
 });
 
 db.connect((err) => {
@@ -21,7 +25,7 @@ db.connect((err) => {
 });
 
 // JWT and Bcrypt setup
-const JWT_SECRET = "your-secret-key"; // This should ideally be stored in a secure environment variable
+const JWT_SECRET = process.env.JWT_SECRET; // This should ideally be stored in a secure environment variable
 
 // Middleware for CORS
 app.use((req, res, next) => {

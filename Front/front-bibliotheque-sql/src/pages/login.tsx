@@ -39,9 +39,9 @@ const Login = () => {
     <div>
       <h2>Se connecter</h2>
       <form>
-          <TextField label="Nom d'utilisateur"type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <TextField  label="Nom d'utilisateur"type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         <br />
-          <TextField label="Mot de passe:" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <TextField type="password" label="Mot de passe:" value={password} onChange={(e) => setPassword(e.target.value)} />
         <br />
         <Button type="button" onClick={handleLogin}>Se connecter</Button>
       </form>
