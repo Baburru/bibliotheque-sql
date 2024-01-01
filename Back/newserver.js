@@ -169,7 +169,7 @@ app.post("/api/abonnes/:id", authenticateToken, (req, res) => {
   const requestData = req.body;
 
   db.query(
-    `SELECT nom FROM abonne WHERE id = ?`, 
+    "SELECT nom FROM abonne WHERE id = ?", 
     [abonneId], 
     (err, results) => {
       if (err) {
@@ -255,7 +255,7 @@ function updateAbonneAndUsername(abonneId, requestData, res) {
 
       // Mise à jour du nom dans 'utilisateurs'
       db.query(
-        `UPDATE utilisateurs SET username = ? WHERE abonne_id = ?`,
+        "UPDATE utilisateurs SET username = ? WHERE abonne_id = ?",
         [requestData.nom, abonneId],
         (err, resultUtilisateurs) => {
           if (err) {
@@ -335,7 +335,7 @@ app.post("/api/register", (req, res) => {
     if (type === "admin") {
       // Insérer directement dans 'utilisateurs' sans 'abonne_id'
       db.query(
-        `INSERT INTO utilisateurs (username, password, type) VALUES (?, ?, ?)`,
+        "INSERT INTO utilisateurs (username, password, type) VALUES (?, ?, ?)",
         [username, hashedPassword, type],
         (err) => {
           if (err) {
@@ -352,7 +352,7 @@ app.post("/api/register", (req, res) => {
     } else {
       // Pour les autres utilisateurs, vérifiez dans 'abonne'
       db.query(
-        `SELECT id FROM abonne WHERE nom = ?`,
+        "SELECT id FROM abonne WHERE nom = ?",
         [username],
         (err, users) => {
           if (err) {
@@ -370,7 +370,7 @@ app.post("/api/register", (req, res) => {
 
           // Enregistrer l'utilisateur dans la table 'utilisateurs'
           db.query(
-            `INSERT INTO utilisateurs (username, password, type, abonne_id) VALUES (?, ?, ?, ?)`,
+            "INSERT INTO utilisateurs (username, password, type, abonne_id) VALUES (?, ?, ?, ?)",
             [username, hashedPassword, type, abonneId],
             (err) => {
               if (err) {
